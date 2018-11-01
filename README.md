@@ -10,7 +10,7 @@ My Frontline Education challenge automation solution: a small utility for parsin
 * After analyzing the test string, dismantle it chunk by chunk by matching against a particular regular expression while keeping track of the current level of depth.
 * Store each of these sub-sections as their own object (Segment) with unique GUIDs pointing back to parent sections.
 * At the end of gathering all segments and their relationships, tree can be dynamically reconstructed at the end (to support both direct output & alphabetical output.)
-* New test cases can be added within the 'tests' directory and executed as part of the group or as one-offs (by providing an individual test case number at the command-line.)
+* New test cases can be added within the `tests` directory and executed as part of the group or as one-offs (by providing an individual test case number at the command-line.)
 
 # Assumptions
 * Test string is surrounded by parentheses.
@@ -21,6 +21,11 @@ My Frontline Education challenge automation solution: a small utility for parsin
 * Each test case file starts with a number followed by an underscore.
 * No test case starts with a duplicate number.
 * No empty parentheses in valid test case string (i.e. "()").
+
+# Flags
+* `-d`: Activate debug mode, displaying all debug-level statements in the console.
+* `-t {number}`: Identify an individual test case to run found in the `tests` subfolder. (If not specified, will instead run *all* test cases found in the `tests` subfolder.)
+* `-a`: Sort parsed string results alphabetically.
 
 # Post Mortem
 * Alternatively, more probably could've been done by attempting a [potentially] simpler implementation, such as tokenizing out the string, processing it character-by-character (and seeking out parentheses to increment/decrement the current depth), or trying to perform character substitution to transition the string into a more workable format (like JSON.)
