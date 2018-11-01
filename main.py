@@ -63,7 +63,7 @@ def check_folder_validity():
 
 	return is_valid
 
-def check_test_validity():
+def check_test_validity(master_string):
 	has_valid_bookends = bool(regex.match(parens_check_regex, master_string))
 	has_valid_parens_count = True if master_string.count('(') == master_string.count(')') else False
 	has_empty_parens = False if master_string.find('()') == -1 else True
@@ -182,6 +182,24 @@ def display_output():
 
 	print_segments(segment_list)
 
+def execute_test_case(case_filepath):
+	with open(case_filepath) as file:
+		master_string = file.readline()
+
+	# Strip out any erroneous whitespace from the input:
+	master_string = ''.join(master_string.split())
+
+	logger.info(" ------> Executing: " + case_filepath + " <------ ")
+
+	# Check whether the test string given is even valid before starting:
+	is_valid_test = check_test_validity(master_string)
+
+	if is_valid_test:
+		gather_segments(master_string, depth_level, test_bits)
+		display_output()
+	else:
+		logger.info("Test to execute was invalid, skipping.")
+
 def reset_state():
 	# Reset structural variables between case runs when in ExecutionType.ALL mode:
 	depth_level = -1
@@ -222,47 +240,16 @@ if __name__ == "__main__":
 
 			for path in test_case_filepaths:
 				if path.startswith(str(test_case_number) + '_'):
-					case_filepath = 'tests/' + path
+					case_filepath = path
 					break
 
 			if case_filepath:
-				with open(case_filepath) as file:
-					master_string = file.readline()
-
-				# Strip out any erroneous whitespace from the input:
-				master_string = ''.join(master_string.split())
-
-				logger.info(" ------> Executing: " + case_filepath + " <------ ")
-
-				# Check whether the test string given is even valid before starting:
-				is_valid_test = check_test_validity()
-
-				if is_valid_test:
-					gather_segments(master_string, depth_level, test_bits)
-					display_output()
-				else:
-					logger.info("Test to execute was invalid, skipping.")
+				execute_test_case('tests/' + case_filepath)
 			else:
 				logger.info("Test case not found, aborting.")
 		else:
 			for case_filepath in test_case_filepaths:
-				with open('tests/' + case_filepath) as file:
-					master_string = file.readline()
-
-				# Strip out any erroneous whitespace from the input:
-				master_string = ''.join(master_string.split())
-
-				logger.info(" ------> Executing: " + case_filepath + " <------ ")
-
-				# Check whether the test string given is even valid before starting:
-				is_valid_test = check_test_validity()
-
-				if is_valid_test:
-					gather_segments(master_string, depth_level, test_bits)
-					display_output()
-				else:
-					logger.info("Test to execute was invalid, skipping.")
-
+				execute_test_case('tests/' + case_filepath)
 				reset_state()
 	else:
 		logger.info("Test case folder is structured incorrectly, aborting.")
