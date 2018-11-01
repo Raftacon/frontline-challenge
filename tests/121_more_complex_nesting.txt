@@ -1,0 +1,1 @@
+(id,created,employee(id,firstname,employeeType(id), lastname(id, blue(car, fish))),location(x,y))
