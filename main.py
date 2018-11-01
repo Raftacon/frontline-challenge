@@ -3,9 +3,6 @@ from enum import Enum
 from operator import attrgetter
 import pygogo as gogo
 
-# TODO: REMOVE THIS!!!
-master_string = "(id,created,employee(id,firstname,employeeType(id), lastname),location)"
-
 # Declare our crucial regular expressions to enable us to parse:
 parens_check_regex = r'^\(.*\)$'
 nest_extract_regex = r'\((?>[^()]+|(?R))*\)'
