@@ -1,5 +1,5 @@
 # frontline-challenge
-My Frontline challenge automation solution: a small utility for parsing out strings with nested parentheses in a given format.
+My Frontline Education challenge automation solution: a small utility for parsing out strings with nested parentheses in a given format.
 
 # Requirements
 * Using Python 2.7.
