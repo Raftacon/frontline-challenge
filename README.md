@@ -9,7 +9,7 @@ My Frontline Education challenge automation solution: a small utility for parsin
 # Approach
 * After analyzing the test string, dismantle it chunk by chunk by matching against a particular regular expression while keeping track of the current level of depth.
 * Store each of these sub-sections as their own object (Segment) with unique GUIDs pointing back to parent sections.
-* At the end of gathering all segments and their relationships, tree can be dynamically reconstructed at the end (to support both direct output & alphabetical output.)
+* At the end of gathering all segments and their relationships, tree can be dynamically reconstructed (to support both direct output & alphabetical output.)
 * New test cases can be added within the `tests` directory and executed as part of the group or as one-offs (by providing an individual test case number at the command-line.)
 
 # Assumptions
